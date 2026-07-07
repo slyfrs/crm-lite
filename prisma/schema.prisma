@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id          String   @id @default(cuid())
+  firstName   String
+  lastName    String
+  email       String?
+  phone       String?
+  company     String?
+  source      String   // site, email, phone, referral, manual
+  status      String   @default("new") // new, converted
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  accountId   String?
+  account     Account? @relation(fields: [accountId], references: [id])
+  contactId   String?
+  contact     Contact? @relation(fields: [contactId], references: [id])
+  opportunity Opportunity[]
+  activities  Activity[]
+}
+
+model Account {
+  id          String      @id @default(cuid())
+  name        String
+  industry    String?
+  website     String?
+  phone       String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  leads       Lead[]
+  contacts    Contact[]
+  opportunities Opportunity[]
+  activities  Activity[]
+}
+
+model Contact {
+  id          String      @id @default(cuid())
+  firstName   String
+  lastName    String
+  email       String?
+  phone       String?
+  jobTitle    String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  accountId   String?
+  account     Account?    @relation(fields: [accountId], references: [id])
+  leads       Lead[]
+  opportunities Opportunity[]
+  activities  Activity[]
+}
+
+model Stage {
+  id          String      @id @default(cuid())
+  name        String      @unique
+  position    Int         @unique
+  createdAt   DateTime    @default(now())
+
+  opportunities Opportunity[]
+}
+
+model Opportunity {
+  id           String    @id @default(cuid())
+  name         String
+  amount       Float?
+  lostReason   String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  stageId      String
+  stage        Stage     @relation(fields: [stageId], references: [id])
+  accountId    String?
+  account      Account?  @relation(fields: [accountId], references: [id])
+  contactId    String?
+  contact      Contact?  @relation(fields: [contactId], references: [id])
+  leadId       String?
+  lead         Lead?     @relation(fields: [leadId], references: [id])
+  activities   Activity[]
+}
+
+model Activity {
+  id           String    @id @default(cuid())
+  type         String    // note, task
+  title        String
+  description  String?
+  dueDate      DateTime?
+  done         Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  leadId       String?
+  lead         Lead?     @relation(fields: [leadId], references: [id])
+  accountId    String?
+  account      Account?  @relation(fields: [accountId], references: [id])
+  contactId    String?
+  contact      Contact?  @relation(fields: [contactId], references: [id])
+  opportunityId String?
+  opportunity  Opportunity? @relation(fields: [opportunityId], references: [id])
+}
