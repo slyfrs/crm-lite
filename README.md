@@ -1,6 +1,6 @@
 # CRM-lite
 
-Local educational CRM.
+Mini CRM.
 
 | Leads | Accounts |
 |------|----------|
