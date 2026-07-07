@@ -1,14 +1,19 @@
-# CRM-lite
+# ✨ CRM-lite
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-18-blue)](https://www.postgresql.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+> **Mini CRM.**
 
-Mini CRM.
 
+## 🖼️ Screenshots
 | Leads | Accounts |
 |------|----------|
 | ![Leads](public/leads.png) | ![Accounts](public/accounts.png) |
 | **Pipeline** | **Dashboard** |
 | ![Deals](public/deals.png) | ![Dashboard](public/dashboard.png) |
 
-## Stack
+## 🛠️ Stack
 
 - Next.js 16 (App Router, React 19)
 - TypeScript
@@ -18,7 +23,7 @@ Mini CRM.
 - Tailwind CSS 4
 - Chart.js 4.5.1 + react-chartjs-2 5.3.1
 
-## Quick Start
+## 🐳 Quick Start
 
 ### 1. Install dependencies
 
@@ -164,3 +169,13 @@ The seed creates 6 leads, 4 companies, 5 contacts, 6 deals, 8 activities:
 - No realtime/websocket updates.
 - No file attachments.
 - No data export.
+
+## 📄 License
+**Distributed under the MIT License. See LICENSE for more information.**
+
+## 🙏 Acknowledgements
+
+- Next.js
+
+- Tailwind CSS
+
